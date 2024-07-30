@@ -121,6 +121,8 @@ void LCD_SR();
 void LCD_SL();
 void LCD_Clear();
 
+void I2C_Slave_Init();
+
 
 #ifdef	__cplusplus
 extern "C" {

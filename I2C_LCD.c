@@ -187,3 +187,15 @@ void LCD_Clear()
   LCD_CMD(0x01); 
   __delay_us(40);
 }
+
+void I2C_Slave_Init() {
+    SSPADD = 50; // Adresse de l'esclave
+    SSPCON = 0b00110110; // Configure le module MSSP en mode I2C esclave avec l'accusé de réception de la correspondance d'adresse
+    SSPCON2 = 0;
+    SSPSTAT = 0x80; // Slew rate control disabled for standard speed mode (100kHz)
+    TRISC3 = 1; // SCL en entrée
+    TRISC4 = 1; // SDA en entrée
+    GIE = 1; // Active les interruptions globales
+    PEIE = 1; // Active les interruptions périphériques
+    SSPIE = 1; // Active les interruptions MSSP
+}

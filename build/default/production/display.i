@@ -5783,6 +5783,8 @@ void noBacklight();
 void LCD_SR();
 void LCD_SL();
 void LCD_Clear();
+
+void I2C_Slave_Init();
 # 5 "display.c" 2
 
 

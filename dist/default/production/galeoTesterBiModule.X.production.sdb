@@ -68,7 +68,7 @@ I2C_DATA_NACK 3
 I2C_TIMEOUT 4
 I2C_NULL 5
 ]
-"499 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\main.c
+"523 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\main.c
 [e E3374 . `uc
 AN3 8
 AN4 9
@@ -142,6 +142,8 @@ channel_FVR 31
 [v _LCD_Set_Cursor LCD_Set_Cursor `(v  1 e 1 0 ]
 "185
 [v _LCD_Clear LCD_Clear `(v  1 e 1 0 ]
+"191
+[v _I2C_Slave_Init I2C_Slave_Init `(v  1 e 1 0 ]
 "66 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\main.c
 [v _main main `(v  1 e 1 0 ]
 "67 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/adc.c
@@ -188,9 +190,7 @@ channel_FVR 31
 [v _wr2RegCompleteHandler wr2RegCompleteHandler `(E360  1 s 1 wr2RegCompleteHandler ]
 "170
 [v _rdBlkRegCompleteHandler rdBlkRegCompleteHandler `(E360  1 s 1 rdBlkRegCompleteHandler ]
-"167 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/i2c_master.c
-[v _I2C_Initialize I2C_Initialize `(v  1 e 1 0 ]
-"176
+"176 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/i2c_master.c
 [v _I2C_Open I2C_Open `(E355  1 e 1 0 ]
 "211
 [v _I2C_Close I2C_Close `(E355  1 e 1 0 ]
@@ -354,7 +354,7 @@ channel_FVR 31
 [v _alerteDefautEtape16 alerteDefautEtape16 `(v  1 e 1 0 ]
 "213 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X/mcc_generated_files/i2c_master.h
 [v _MSSP_InterruptHandler MSSP_InterruptHandler `*.37(v  1 e 2 0 ]
-[s S557 . 1 `uc 1 IOCIF 1 0 :1:0 
+[s S553 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 IOCIE 1 0 :1:3 
@@ -364,14 +364,14 @@ channel_FVR 31
 `uc 1 GIE 1 0 :1:7 
 ]
 "375 C:\Program Files\Microchip\xc8\v2.32\pic\include\proc\pic16lf1939.h
-[s S566 . 1 `uc 1 . 1 0 :2:0 
+[s S562 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 T0IE 1 0 :1:5 
 ]
-[u S571 . 1 `S557 1 . 1 0 `S566 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES571  1 e 1 @11 ]
-[s S1379 . 1 `uc 1 RC0 1 0 :1:0 
+[u S567 . 1 `S553 1 . 1 0 `S562 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES567  1 e 1 @11 ]
+[s S1366 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -381,9 +381,9 @@ channel_FVR 31
 `uc 1 RC7 1 0 :1:7 
 ]
 "571
-[u S1388 . 1 `S1379 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES1388  1 e 1 @14 ]
-[s S1852 . 1 `uc 1 RD0 1 0 :1:0 
+[u S1375 . 1 `S1366 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES1375  1 e 1 @14 ]
+[s S1851 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -393,9 +393,9 @@ channel_FVR 31
 `uc 1 RD7 1 0 :1:7 
 ]
 "633
-[u S1861 . 1 `S1852 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES1861  1 e 1 @15 ]
-[s S601 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S1860 . 1 `S1851 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES1860  1 e 1 @15 ]
+[s S597 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -405,9 +405,9 @@ channel_FVR 31
 `uc 1 TMR1GIF 1 0 :1:7 
 ]
 "733
-[u S610 . 1 `S601 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES610  1 e 1 @17 ]
-[s S647 . 1 `uc 1 CCP2IF 1 0 :1:0 
+[u S606 . 1 `S597 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES606  1 e 1 @17 ]
+[s S643 . 1 `uc 1 CCP2IF 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 LCDIF 1 0 :1:2 
 `uc 1 BCLIF 1 0 :1:3 
@@ -417,8 +417,8 @@ channel_FVR 31
 `uc 1 OSFIF 1 0 :1:7 
 ]
 "795
-[u S656 . 1 `S647 1 . 1 0 ]
-[v _PIR2bits PIR2bits `VES656  1 e 1 @18 ]
+[u S652 . 1 `S643 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES652  1 e 1 @18 ]
 "1314
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1376
@@ -429,7 +429,7 @@ channel_FVR 31
 [v _TRISD TRISD `VEuc  1 e 1 @143 ]
 "1562
 [v _TRISE TRISE `VEuc  1 e 1 @144 ]
-[s S340 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S336 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -439,9 +439,9 @@ channel_FVR 31
 `uc 1 TMR1GIE 1 0 :1:7 
 ]
 "1617
-[u S349 . 1 `S340 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES349  1 e 1 @145 ]
-[s S626 . 1 `uc 1 CCP2IE 1 0 :1:0 
+[u S345 . 1 `S336 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES345  1 e 1 @145 ]
+[s S622 . 1 `uc 1 CCP2IE 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 LCDIE 1 0 :1:2 
 `uc 1 BCLIE 1 0 :1:3 
@@ -451,8 +451,8 @@ channel_FVR 31
 `uc 1 OSFIE 1 0 :1:7 
 ]
 "1679
-[u S635 . 1 `S626 1 . 1 0 ]
-[v _PIE2bits PIE2bits `VES635  1 e 1 @146 ]
+[u S631 . 1 `S622 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES631  1 e 1 @146 ]
 [s S171 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
@@ -482,7 +482,7 @@ channel_FVR 31
 [v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
 "2197
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
-[s S259 . 1 `uc 1 ADON 1 0 :1:0 
+[s S255 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -491,23 +491,23 @@ channel_FVR 31
 `uc 1 CHS4 1 0 :1:6 
 ]
 "2226
-[s S267 . 1 `uc 1 . 1 0 :1:0 
+[s S263 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 ADGO 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
-[s S271 . 1 `uc 1 . 1 0 :1:0 
+[s S267 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 ]
-[s S274 . 1 `uc 1 . 1 0 :1:0 
+[s S270 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[u S277 . 1 `S259 1 . 1 0 `S267 1 . 1 0 `S271 1 . 1 0 `S274 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES277  1 e 1 @157 ]
+[u S273 . 1 `S255 1 . 1 0 `S263 1 . 1 0 `S267 1 . 1 0 `S270 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES273  1 e 1 @157 ]
 "2286
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
 "2358
 [v _LATA LATA `VEuc  1 e 1 @268 ]
-[s S1402 . 1 `uc 1 LATA0 1 0 :1:0 
+[s S1410 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -517,11 +517,11 @@ channel_FVR 31
 `uc 1 LATA7 1 0 :1:7 
 ]
 "2375
-[u S1411 . 1 `S1402 1 . 1 0 ]
-[v _LATAbits LATAbits `VES1411  1 e 1 @268 ]
+[u S1419 . 1 `S1410 1 . 1 0 ]
+[v _LATAbits LATAbits `VES1419  1 e 1 @268 ]
 "2420
 [v _LATB LATB `VEuc  1 e 1 @269 ]
-[s S1897 . 1 `uc 1 LATB0 1 0 :1:0 
+[s S1901 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -531,22 +531,22 @@ channel_FVR 31
 `uc 1 LATB7 1 0 :1:7 
 ]
 "2437
-[u S1906 . 1 `S1897 1 . 1 0 ]
-[v _LATBbits LATBbits `VES1906  1 e 1 @269 ]
+[u S1910 . 1 `S1901 1 . 1 0 ]
+[v _LATBbits LATBbits `VES1910  1 e 1 @269 ]
 "2482
 [v _LATC LATC `VEuc  1 e 1 @270 ]
 "2544
 [v _LATD LATD `VEuc  1 e 1 @271 ]
 "2614
 [v _LATE LATE `VEuc  1 e 1 @272 ]
-[s S1482 . 1 `uc 1 LATE0 1 0 :1:0 
+[s S1872 . 1 `uc 1 LATE0 1 0 :1:0 
 `uc 1 LATE1 1 0 :1:1 
 `uc 1 LATE2 1 0 :1:2 
 `uc 1 LATE3 1 0 :1:3 
 ]
 "2627
-[u S1487 . 1 `S1482 1 . 1 0 ]
-[v _LATEbits LATEbits `VES1487  1 e 1 @272 ]
+[u S1877 . 1 `S1872 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1877  1 e 1 @272 ]
 "2924
 [v _BORCON BORCON `VEuc  1 e 1 @278 ]
 "3273
@@ -567,7 +567,7 @@ channel_FVR 31
 [v _EEDATL EEDATL `VEuc  1 e 1 @403 ]
 "3647
 [v _EEDATH EEDATH `VEuc  1 e 1 @404 ]
-[s S1274 . 1 `uc 1 RD 1 0 :1:0 
+[s S1270 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -577,8 +577,8 @@ channel_FVR 31
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "3684
-[u S1283 . 1 `S1274 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES1283  1 e 1 @405 ]
+[u S1279 . 1 `S1270 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES1279  1 e 1 @405 ]
 "3729
 [v _EECON2 EECON2 `VEuc  1 e 1 @406 ]
 "3749
@@ -591,7 +591,7 @@ channel_FVR 31
 [v _SPBRGH SPBRGH `VEuc  1 e 1 @412 ]
 "3888
 [v _RCSTA RCSTA `VEuc  1 e 1 @413 ]
-[s S438 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S434 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -601,11 +601,11 @@ channel_FVR 31
 `uc 1 SPEN 1 0 :1:7 
 ]
 "3905
-[u S447 . 1 `S438 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES447  1 e 1 @413 ]
+[u S443 . 1 `S434 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES443  1 e 1 @413 ]
 "3950
 [v _TXSTA TXSTA `VEuc  1 e 1 @414 ]
-[s S416 . 1 `uc 1 TX9D 1 0 :1:0 
+[s S412 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -615,8 +615,8 @@ channel_FVR 31
 `uc 1 CSRC 1 0 :1:7 
 ]
 "3967
-[u S425 . 1 `S416 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES425  1 e 1 @414 ]
+[u S421 . 1 `S412 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES421  1 e 1 @414 ]
 "4012
 [v _BAUDCON BAUDCON `VEuc  1 e 1 @415 ]
 "4064
@@ -629,7 +629,7 @@ channel_FVR 31
 [v _SSPADD SSPADD `VEuc  1 e 1 @530 ]
 "4215
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @532 ]
-[s S1030 . 1 `uc 1 BF 1 0 :1:0 
+[s S1026 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -639,13 +639,13 @@ channel_FVR 31
 `uc 1 SMP 1 0 :1:7 
 ]
 "4232
-[u S1039 . 1 `S1030 1 . 1 0 ]
-[v _SSPSTATbits SSPSTATbits `VES1039  1 e 1 @532 ]
+[u S1035 . 1 `S1026 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES1035  1 e 1 @532 ]
 "4277
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @533 ]
 "4282
 [v _SSPCON SSPCON `VEuc  1 e 1 @533 ]
-[s S829 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S825 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
@@ -655,13 +655,13 @@ channel_FVR 31
 `uc 1 WCOL 1 0 :1:7 
 ]
 "4302
-[s S838 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S834 . 1 `uc 1 SSPM 1 0 :4:0 
 ]
-[u S840 . 1 `S829 1 . 1 0 `S838 1 . 1 0 ]
-[v _SSPCON1bits SSPCON1bits `VES840  1 e 1 @533 ]
+[u S836 . 1 `S825 1 . 1 0 `S834 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES836  1 e 1 @533 ]
 "4415
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @534 ]
-[s S997 . 1 `uc 1 SEN 1 0 :1:0 
+[s S993 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -671,14 +671,18 @@ channel_FVR 31
 `uc 1 GCEN 1 0 :1:7 
 ]
 "4432
-[u S1006 . 1 `S997 1 . 1 0 ]
-[v _SSPCON2bits SSPCON2bits `VES1006  1 e 1 @534 ]
+[u S1002 . 1 `S993 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES1002  1 e 1 @534 ]
 "7823
 [v _ACKDT ACKDT `VEb  1 e 0 @4277 ]
 "7826
 [v _ACKEN ACKEN `VEb  1 e 0 @4276 ]
 "7829
 [v _ACKSTAT ACKSTAT `VEb  1 e 0 @4278 ]
+"8417
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"8834
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
 "8837
 [v _PEN PEN `VEb  1 e 0 @4274 ]
 "8840
@@ -689,6 +693,8 @@ channel_FVR 31
 [v _RSEN RSEN `VEb  1 e 0 @4273 ]
 "9407
 [v _SEN SEN `VEb  1 e 0 @4272 ]
+"9482
+[v _SSPIE SSPIE `VEb  1 e 0 @1163 ]
 "9485
 [v _SSPIF SSPIF `VEb  1 e 0 @139 ]
 "9791
@@ -721,18 +727,18 @@ channel_FVR 31
 [v _eusartRxTail eusartRxTail `VEuc  1 e 1 0 ]
 "69
 [v _eusartRxBuffer eusartRxBuffer `VE[8]uc  1 e 8 0 ]
-[s S327 . 1 `uc 1 perr 1 0 :1:0 
+[s S323 . 1 `uc 1 perr 1 0 :1:0 
 `uc 1 ferr 1 0 :1:1 
 `uc 1 oerr 1 0 :1:2 
 `uc 1 reserved 1 0 :5:3 
 ]
 "70
-[u S332 . 1 `S327 1 . 1 0 `uc 1 status 1 0 ]
-[v _eusartRxStatusBuffer eusartRxStatusBuffer `VE[8]S332  1 e 8 0 ]
+[u S328 . 1 `S323 1 . 1 0 `uc 1 status 1 0 ]
+[v _eusartRxStatusBuffer eusartRxStatusBuffer `VE[8]S328  1 e 8 0 ]
 "71
 [v _eusartRxCount eusartRxCount `VEuc  1 e 1 0 ]
 "72
-[v _eusartRxLastError eusartRxLastError `VES332  1 e 1 0 ]
+[v _eusartRxLastError eusartRxLastError `VES328  1 e 1 0 ]
 "77
 [v _EUSART_TxDefaultInterruptHandler EUSART_TxDefaultInterruptHandler `*.37(v  1 e 2 0 ]
 "78
@@ -745,19 +751,19 @@ channel_FVR 31
 [v _EUSART_ErrorHandler EUSART_ErrorHandler `*.37(v  1 e 2 0 ]
 "146 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/i2c_master.c
 [v _i2c_fsmStateTable i2c_fsmStateTable `DC[16]*.37(E3338  1 e 32 0 ]
-[s S803 . 29 `[6]*.37(E360 1 callbackTable 12 0 `[6]*.1v 1 callbackPayload 6 12 `us 1 time_out 2 18 `us 1 time_out_value 2 20 `uc 1 address 1 22 `*.1uc 1 data_ptr 1 23 `ui 1 data_length 2 24 `E3338 1 state 1 26 `E355 1 error 1 27 `uc 1 addressNackCheck 1 28 :1:0 
+[s S799 . 29 `[6]*.37(E360 1 callbackTable 12 0 `[6]*.1v 1 callbackPayload 6 12 `us 1 time_out 2 18 `us 1 time_out_value 2 20 `uc 1 address 1 22 `*.1uc 1 data_ptr 1 23 `ui 1 data_length 2 24 `E3338 1 state 1 26 `E355 1 error 1 27 `uc 1 addressNackCheck 1 28 :1:0 
 `uc 1 busy 1 28 :1:1 
 `uc 1 inUse 1 28 :1:2 
 `uc 1 bufferFree 1 28 :1:3 
 ]
 "165
-[v _I2C_Status I2C_Status `S803  1 e 29 0 ]
+[v _I2C_Status I2C_Status `S799  1 e 29 0 ]
 "66 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"537
-[v main@buffer_1718 buffer `i  1 a 2 2 ]
-"500
+"561
+[v main@buffer_1713 buffer `i  1 a 2 2 ]
+"524
 [v main@buffer buffer `i  1 a 2 0 ]
 "92
 [v main@slectureAN1 slectureAN1 `[5]uc  1 a 5 4 ]
@@ -773,19 +779,19 @@ channel_FVR 31
 [v main@programmation programmation `a  1 a 1 14 ]
 "93
 [v main@testLeds testLeds `a  1 a 1 11 ]
-"97
-[v main@master master `a  1 a 1 10 ]
 "98
-[v main@slaveBUF slaveBUF `uc  1 a 1 9 ]
-"777
+[v main@slaveBUF slaveBUF `uc  1 a 1 10 ]
+"97
+[v main@master master `a  1 a 1 9 ]
+"801
 } 0
 "9 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
 [v sprintf@s s `*.6uc  1 a 1 wreg ]
-[s S2550 _IO_FILE 5 `*.6uc 1 buffer 1 0 `i 1 count 2 1 `i 1 limit 2 3 ]
+[s S2558 _IO_FILE 5 `*.6uc 1 buffer 1 0 `i 1 count 2 1 `i 1 limit 2 3 ]
 "13
-[v sprintf@f f `S2550  1 a 5 21 ]
+[v sprintf@f f `S2558  1 a 5 21 ]
 "11
 [v sprintf@ret ret `i  1 a 2 17 ]
 "12
@@ -851,9 +857,9 @@ channel_FVR 31
 [v alerteDefautEtape16@testVoy testVoy `*.6a  1 p 1 58 ]
 [v alerteDefautEtape16@autom autom `*.6a  1 p 1 59 ]
 [v alerteDefautEtape16@prog prog `*.6a  1 p 1 60 ]
-[v alerteDefautEtape16@F3808 F3808 `[20]uc  1 s 20 F3808 ]
+[v alerteDefautEtape16@F3809 F3809 `[20]uc  1 s 20 F3809 ]
 "784
-[v alerteDefautEtape16@F3810 F3810 `[10]uc  1 s 10 F3810 ]
+[v alerteDefautEtape16@F3811 F3811 `[10]uc  1 s 10 F3811 ]
 "829
 } 0
 "103
@@ -1016,9 +1022,9 @@ channel_FVR 31
 [v alerteDefaut@etape etape `*.25uc  1 p 2 16 ]
 [v alerteDefaut@testAct testAct `*.39a  1 p 2 18 ]
 [v alerteDefaut@testVoy testVoy `*.39a  1 p 2 20 ]
-[v alerteDefaut@F3753 F3753 `[20]uc  1 s 20 F3753 ]
+[v alerteDefaut@F3754 F3754 `[20]uc  1 s 20 F3754 ]
 "338
-[v alerteDefaut@F3755 F3755 `[10]uc  1 s 10 F3755 ]
+[v alerteDefaut@F3756 F3756 `[10]uc  1 s 10 F3756 ]
 "356
 } 0
 "3 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\strcat.c
@@ -1052,42 +1058,42 @@ channel_FVR 31
 "1390 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\doprnt.c
 [v _vfprintf vfprintf `(i  1 e 2 0 ]
 {
-[s S2576 _IO_FILE 0 ]
-[v vfprintf@fp fp `*.4S2576  1 a 1 wreg ]
+[s S2584 _IO_FILE 0 ]
+[v vfprintf@fp fp `*.4S2584  1 a 1 wreg ]
 "1393
 [v vfprintf@cfmt cfmt `*.26uc  1 a 2 11 ]
 "1390
-[v vfprintf@fp fp `*.4S2576  1 a 1 wreg ]
+[v vfprintf@fp fp `*.4S2584  1 a 1 wreg ]
 [v vfprintf@fmt fmt `*.26DCuc  1 p 2 68 ]
 [v vfprintf@ap ap `*.4*.4v  1 p 1 70 ]
 "1395
 "1390
-[v vfprintf@fp fp `*.4S2576  1 a 1 10 ]
+[v vfprintf@fp fp `*.4S2584  1 a 1 10 ]
 "1404
 } 0
 "692
 [v _vfpfcnvrt vfpfcnvrt `(i  1 s 2 vfpfcnvrt ]
 {
-[s S2576 _IO_FILE 0 ]
-[v vfpfcnvrt@fp fp `*.4S2576  1 a 1 wreg ]
+[s S2584 _IO_FILE 0 ]
+[v vfpfcnvrt@fp fp `*.4S2584  1 a 1 wreg ]
 "696
 [v vfpfcnvrt@ll ll `o  1 a 8 0 ]
 "699
 [v vfpfcnvrt@vp vp `*.4v  1 a 1 8 ]
 "692
-[v vfpfcnvrt@fp fp `*.4S2576  1 a 1 wreg ]
+[v vfpfcnvrt@fp fp `*.4S2584  1 a 1 wreg ]
 [v vfpfcnvrt@fmt fmt `*.4*.26uc  1 p 1 61 ]
 [v vfpfcnvrt@ap ap `*.4*.4v  1 p 1 62 ]
 "702
 "692
-[v vfpfcnvrt@fp fp `*.4S2576  1 a 1 9 ]
+[v vfpfcnvrt@fp fp `*.4S2584  1 a 1 9 ]
 "1387
 } 0
 "287
 [v _dtoa dtoa `(i  1 s 2 dtoa ]
 {
-[s S2576 _IO_FILE 0 ]
-[v dtoa@fp fp `*.4S2576  1 a 1 wreg ]
+[s S2584 _IO_FILE 0 ]
+[v dtoa@fp fp `*.4S2584  1 a 1 wreg ]
 "290
 [v dtoa@n n `o  1 a 8 51 ]
 "289
@@ -1096,28 +1102,28 @@ channel_FVR 31
 [v dtoa@w w `i  1 a 2 47 ]
 [v dtoa@p p `i  1 a 2 45 ]
 "287
-[v dtoa@fp fp `*.4S2576  1 a 1 wreg ]
+[v dtoa@fp fp `*.4S2584  1 a 1 wreg ]
 [v dtoa@d d `o  1 p 8 31 ]
 "293
 "287
-[v dtoa@fp fp `*.4S2576  1 a 1 42 ]
+[v dtoa@fp fp `*.4S2584  1 a 1 42 ]
 "328
 } 0
 "72
 [v _pad pad `(i  1 s 2 pad ]
 {
-[s S2576 _IO_FILE 0 ]
-[v pad@fp fp `*.4S2576  1 a 1 wreg ]
+[s S2584 _IO_FILE 0 ]
+[v pad@fp fp `*.4S2584  1 a 1 wreg ]
 "74
 [v pad@w w `i  1 a 2 28 ]
 [v pad@i i `i  1 a 2 26 ]
 "72
-[v pad@fp fp `*.4S2576  1 a 1 wreg ]
+[v pad@fp fp `*.4S2584  1 a 1 wreg ]
 [v pad@buf buf `*.6uc  1 p 1 22 ]
 [v pad@p p `i  1 p 2 23 ]
 "77
 "72
-[v pad@fp fp `*.4S2576  1 a 1 30 ]
+[v pad@fp fp `*.4S2584  1 a 1 30 ]
 "95
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\strlen.c
@@ -1139,8 +1145,8 @@ channel_FVR 31
 [v fputs@c c `uc  1 a 1 18 ]
 "8
 [v fputs@s s `*.6DCuc  1 a 1 wreg ]
-[s S2550 _IO_FILE 5 `*.6uc 1 buffer 1 0 `i 1 count 2 1 `i 1 limit 2 3 ]
-[v fputs@fp fp `*.4S2550  1 p 1 14 ]
+[s S2558 _IO_FILE 5 `*.6uc 1 buffer 1 0 `i 1 count 2 1 `i 1 limit 2 3 ]
+[v fputs@fp fp `*.4S2558  1 p 1 14 ]
 "13
 [v fputs@s s `*.6DCuc  1 a 1 21 ]
 "19
@@ -1149,8 +1155,8 @@ channel_FVR 31
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 6 ]
-[s S2550 _IO_FILE 5 `*.6uc 1 buffer 1 0 `i 1 count 2 1 `i 1 limit 2 3 ]
-[v fputc@fp fp `*.4S2550  1 p 1 8 ]
+[s S2558 _IO_FILE 5 `*.6uc 1 buffer 1 0 `i 1 count 2 1 `i 1 limit 2 3 ]
+[v fputc@fp fp `*.4S2558  1 p 1 8 ]
 "24
 } 0
 "201 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/eusart.c
@@ -1318,11 +1324,6 @@ channel_FVR 31
 {
 "73
 } 0
-"167 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/i2c_master.c
-[v _I2C_Initialize I2C_Initialize `(v  1 e 1 0 ]
-{
-"174
-} 0
 "88 C:\Users\Michel\MPLABXProjects\galeoTesterBiModule.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 {
@@ -1422,6 +1423,11 @@ channel_FVR 31
 [v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
 {
 "22
+} 0
+"191
+[v _I2C_Slave_Init I2C_Slave_Init `(v  1 e 1 0 ]
+{
+"201
 } 0
 "9
 [v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]

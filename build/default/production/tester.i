@@ -5789,6 +5789,8 @@ void noBacklight();
 void LCD_SR();
 void LCD_SL();
 void LCD_Clear();
+
+void I2C_Slave_Init();
 # 11 "tester.c" 2
 
 # 1 "./tester.h" 1

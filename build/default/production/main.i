@@ -5782,6 +5782,8 @@ void noBacklight();
 void LCD_SR();
 void LCD_SL();
 void LCD_Clear();
+
+void I2C_Slave_Init();
 # 57 "main.c" 2
 
 # 1 "./tester.h" 1
@@ -5843,9 +5845,7 @@ void main(void) {
 
 
     (INTCONbits.PEIE = 1);
-# 87 "main.c"
-    I2C_Master_Init();
-    LCD_Init(0x4E);
+# 89 "main.c"
     _Bool testActif = 0;
     _Bool testVoyants = 0;
     int lectureAN1;
@@ -5864,7 +5864,21 @@ void main(void) {
 
 
         master = 0;
+        I2C_Slave_Init();
 
+
+    } else {
+
+
+        I2C_Master_Init();
+
+        LCD_Init(0x46);
+        displayManager("TEST CARTE D925ED4", "MODULE ESCLAVE", "POSITIONNER CARTE", "APPUYER SUR OK");
+        _delay((unsigned long)((100)*(16000000/4000.0)));
+
+        LCD_Init(0x4E);
+        displayManager("TEST CARTE D925ED4", "MODULE MAITRE", "POSITIONNER CARTE", "APPUYER SUR OK");
+        _delay((unsigned long)((100)*(16000000/4000.0)));
     }
 
     _delay((unsigned long)((1000)*(16000000/4000.0)));
@@ -5872,6 +5886,13 @@ void main(void) {
 
     while (1) {
 
+        LCD_Init(0x4E);
+        displayManager("TEST CARTE D925ED4", "MODULE MAITRE", "POSITIONNER CARTE", "APPUYER SUR OK");
+        _delay((unsigned long)((100)*(16000000/4000.0)));
+
+        LCD_Init(0x4E);
+        displayManager("TEST CARTE D925ED4", "MODULE MAITRE", "POSITIONNER CARTE", "APPUYER SUR OK");
+        _delay((unsigned long)((100)*(16000000/4000.0)));
 
 
 
@@ -5898,15 +5919,6 @@ void main(void) {
             pap = 0;
         }
 
-        if (!master) {
-
-            displayManager("TEST CARTE D925ED4", "MODULE ESCLAVE", "POSITIONNER CARTE", "APPUYER SUR OK");
-
-        } else {
-
-            displayManager("TEST CARTE D925ED4", "MODULE MAITRE", "POSITIONNER CARTE", "APPUYER SUR OK");
-
-        }
 
 
 
@@ -5929,8 +5941,15 @@ void main(void) {
 
 
         _delay((unsigned long)((100)*(16000000/4000.0)));
-        displayManager("ETAPE 1", "TEST I2C SLAVE", "", "");
-# 205 "main.c"
+
+
+
+        LCD_Init(0x46);
+        displayManager("TEST CARTE D925ED4", "Master en test", "POSITIONNER CARTE", "APPUYER SUR OK");
+        _delay((unsigned long)((100)*(16000000/4000.0)));
+        LCD_Init(0x4E);
+        displayManager("ETAPE 1", "TEST 3 RELAIS ON", "", "");
+# 223 "main.c"
         SSPCON2bits.SEN = 1;
         while (SSPCON2bits.SEN);
         SSPBUF = 50;
@@ -5958,29 +5977,11 @@ void main(void) {
 
 
         if (slaveBUF == 0x55) {
-
-            do { LATEbits.LATE0 = 1; } while(0);
-            do { LATEbits.LATE2 = 1; } while(0);
-            do { LATEbits.LATE1 = 1; } while(0);
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-
+# 268 "main.c"
         }
 
         _delay((unsigned long)((100)*(16000000/4000.0)));
-
-
-        _delay((unsigned long)((10000)*(16000000/4000.0)));
-        startAlert();
-        __asm("reset");
-# 267 "main.c"
+# 291 "main.c"
         pressBP1(1);
         pressBP2(1);
         _delay((unsigned long)((1000)*(16000000/4000.0)));

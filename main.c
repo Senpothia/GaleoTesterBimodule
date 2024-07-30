@@ -84,8 +84,8 @@ void main(void) {
 
 
     // lCD
-    I2C_Master_Init();
-    LCD_Init(0x4E); // Initialize LCD module with I2C address = 0x4E
+    //I2C_Master_Init();
+    //LCD_Init(0x4E); // Initialize LCD module with I2C address = 0x4E
     bool testActif = false;
     bool testVoyants = false;
     int lectureAN1;
@@ -102,9 +102,23 @@ void main(void) {
 
     if (GPIO4_GetValue() == 0) {
 
-
+        // Entrée IO4 à 0V: mode esclave activé
         master = false;
+        I2C_Slave_Init();
+        // LCD_Init(0x46); // Initialize LCD module with I2C address = 0x46
 
+    } else {
+
+        // Entrée IO4 à 5V: mode maitre activé
+        I2C_Master_Init();
+        //LCD_Init(0x4E); // Initialize LCD module with I2C address = 0x4E
+        LCD_Init(0x46);
+        displayManager(TITRE, MODE_SLAVE, BOARD_REQUEST, OK_REQUEST);
+        __delay_ms(100);
+
+        LCD_Init(0x4E);
+        displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
+        __delay_ms(100);
     }
 
     __delay_ms(1000);
@@ -112,6 +126,13 @@ void main(void) {
 
     while (1) {
 
+        LCD_Init(0x4E);
+        displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
+        __delay_ms(100);
+
+        LCD_Init(0x4E);
+        displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
+        __delay_ms(100);
 
         // sélection test individuel des leds
         // le test est inhibé si l'entrée GPIO1 est à zéro
@@ -138,15 +159,6 @@ void main(void) {
             pap = false;
         }
 
-        if (!master) {
-
-            displayManager(TITRE, MODE_SLAVE, BOARD_REQUEST, OK_REQUEST);
-
-        } else {
-
-            displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
-
-        }
 
         // Attente de démarrage
 
@@ -169,8 +181,14 @@ void main(void) {
         // test I2C vers esclave
 
         __delay_ms(100);
-        displayManager("ETAPE 1", "TEST I2C SLAVE", LIGNE_VIDE, LIGNE_VIDE);
+        //displayManager("ETAPE 1", "TEST I2C SLAVE", LIGNE_VIDE, LIGNE_VIDE);
 
+
+        LCD_Init(0x46);
+        displayManager(TITRE, "Master en test", BOARD_REQUEST, OK_REQUEST);
+        __delay_ms(100);
+        LCD_Init(0x4E);
+        displayManager("ETAPE 1", "TEST 3 RELAIS ON", LIGNE_VIDE, LIGNE_VIDE);
 
         // Méthode 1
         /*
@@ -200,8 +218,8 @@ void main(void) {
          */
 
         // Trame de lecture
-        
-        
+
+
         SSPCON2bits.SEN = 1; // Génération START
         while (SSPCON2bits.SEN); // Attente fin de START
         SSPBUF = 50; // Adresse du périphérique en mode écriture 
@@ -223,39 +241,44 @@ void main(void) {
         while (SSPCON2bits.ACKEN); // Attente fin génération NACK
         SSPCON2bits.PEN = 1; //Génération STOP
         while (SSPCON2bits.PEN); //Attente fin de STOP
-        
+
 
         //  Résultat de reception
 
 
         if (slaveBUF == 0x55) {
-            
-            C4_SetHigh();
-            C2_SetHigh();
-            C3_SetHigh();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-            startAlert();
-           
-            
+
+            /*
+             * Premier test
+             * 
+             //C4_SetHigh();
+             //C2_SetHigh();
+             //C3_SetHigh();
+             startAlert();
+             startAlert();
+             startAlert();
+             startAlert();
+             startAlert();
+             startAlert();
+             startAlert();
+             startAlert();
+             startAlert();
+             */
+
         }
 
         __delay_ms(100);
 
-
+        /*
         __delay_ms(10000);
         startAlert();
         RESET();
-
+         * /
         // Fin test I2C vers esclave
         // entrée dans la séquence de test
-
+        
+        // DEMARRAGE SEQUENCE DE TEST
+         * 
         // ETAPE 1
 
         /*
