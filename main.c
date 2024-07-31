@@ -57,8 +57,10 @@
 #include "I2C_LCD.h"
 #include "tester.h"
 #include "display.h"
+#include "I2C_tester.h"
 #include <stdlib.h>
 #include "mcc_generated_files/i2c_master.h"
+#include "I2C-tester.h"
 
 /*
                          Main application
@@ -83,9 +85,6 @@ void main(void) {
     //INTERRUPT_PeripheralInterruptDisable();
 
 
-    // lCD
-    //I2C_Master_Init();
-    //LCD_Init(0x4E); // Initialize LCD module with I2C address = 0x4E
     bool testActif = false;
     bool testVoyants = false;
     int lectureAN1;
@@ -95,7 +94,7 @@ void main(void) {
     bool pap = false;
     bool programmation = true;
     bool master = true;
-    char slaveBUF;
+    char slaveStatus;
 
     // Détermination mode de fonctionnement: master/slave
     // Affichage message d'accueil
@@ -111,6 +110,7 @@ void main(void) {
 
         // Entrée IO4 à 5V: mode maitre activé
         I2C_Master_Init();
+        /*
         //LCD_Init(0x4E); // Initialize LCD module with I2C address = 0x4E
         LCD_Init(0x46);
         displayManager(TITRE, MODE_SLAVE, BOARD_REQUEST, OK_REQUEST);
@@ -119,6 +119,7 @@ void main(void) {
         LCD_Init(0x4E);
         displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
         __delay_ms(100);
+         */
     }
 
     __delay_ms(1000);
@@ -130,8 +131,8 @@ void main(void) {
         displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
         __delay_ms(100);
 
-        LCD_Init(0x4E);
-        displayManager(TITRE, MODE_MASTER, BOARD_REQUEST, OK_REQUEST);
+        LCD_Init(0x46);
+        displayManager(TITRE, MODE_SLAVE, BOARD_REQUEST, OK_REQUEST);
         __delay_ms(100);
 
         // sélection test individuel des leds
@@ -171,7 +172,6 @@ void main(void) {
 
         programmation = false;
         startAlert();
-        //displayManager("ETAPE 1", "TEST 3 RELAIS ON", LIGNE_VIDE, LIGNE_VIDE);
         testActif = true;
         ledConforme(false);
         ledNonConforme(false);
@@ -181,9 +181,7 @@ void main(void) {
         // test I2C vers esclave
 
         __delay_ms(100);
-        //displayManager("ETAPE 1", "TEST I2C SLAVE", LIGNE_VIDE, LIGNE_VIDE);
-
-
+     
         LCD_Init(0x46);
         displayManager(TITRE, "Master en test", BOARD_REQUEST, OK_REQUEST);
         __delay_ms(100);
@@ -219,7 +217,7 @@ void main(void) {
 
         // Trame de lecture
 
-
+        /*
         SSPCON2bits.SEN = 1; // Génération START
         while (SSPCON2bits.SEN); // Attente fin de START
         SSPBUF = 50; // Adresse du périphérique en mode écriture 
@@ -241,12 +239,14 @@ void main(void) {
         while (SSPCON2bits.ACKEN); // Attente fin génération NACK
         SSPCON2bits.PEN = 1; //Génération STOP
         while (SSPCON2bits.PEN); //Attente fin de STOP
-
-
+        
+         */
+        
+        slaveStatus = getSlaveStatus(25);
         //  Résultat de reception
 
 
-        if (slaveBUF == 0x55) {
+        if (slaveStatus == 0x55) {
 
             /*
              * Premier test
@@ -307,7 +307,7 @@ void main(void) {
             pressBP2(false);
             alerteDefaut("ETAPE 1", &testActif, &testVoyants);
             sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-            //printf("-> TEST:1:0");
+     
         }
 
         __delay_ms(1000);
@@ -335,7 +335,7 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 2", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:2:0");
+      
             }
         }
 
@@ -358,7 +358,7 @@ void main(void) {
                     testActif = false;
                     alerteDefaut("ETAPE 3", &testActif, &testVoyants);
                     sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                    //printf("-> TEST:3:0");
+        
                 } else {
 
                     printf("-> TEST:3:1");
@@ -386,7 +386,7 @@ void main(void) {
                     testActif = false;
                     alerteDefaut("ETAPE 4", &testActif, &testVoyants);
                     sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                    //printf("-> TEST:4:0");
+
                 } else {
 
                     printf("-> TEST:4:1");
@@ -414,7 +414,6 @@ void main(void) {
                     testActif = false;
                     alerteDefaut("ETAPE 5", &testActif, &testVoyants);
                     sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                    //printf("-> TEST:5:0");
 
                 } else {
 
@@ -448,7 +447,7 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 6", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:6:0");
+     
             }
 
         }
@@ -475,7 +474,6 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 7", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:7:0");
             }
 
         }
@@ -501,7 +499,6 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 8", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:8:0");
             }
 
         }
@@ -531,10 +528,9 @@ void main(void) {
             } else {
 
                 alerteDefaut("ETAPE 9", &testActif, &testVoyants);
-                //displayManager("ETAPE 9", "TEST LED CLAVIER", slectureAN1, LIGNE_VIDE); // Ligne de test: affichage valeur de mesure analogique
+                displayManager("ETAPE 9", "TEST LED CLAVIER", slectureAN1, LIGNE_VIDE); // Ligne de test: affichage valeur de mesure analogique
                 REL8_SetLow();
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:9:0");
 
             }
 
@@ -572,8 +568,7 @@ void main(void) {
                 displayManager("ETAPE 10", "TEST LED CLAVIER", slectureAN1, LIGNE_VIDE); // Ligne de test: affichage valeur de mesure analogique
                 REL8_SetHigh();
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:10:0");
-
+  
             }
             __delay_ms(2000);
 
@@ -610,8 +605,7 @@ void main(void) {
                 pressBP2(false);
                 alerteDefaut("ETAPE 12", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:12:0");
-
+             
             }
 
             __delay_ms(1000);
@@ -639,12 +633,7 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 13", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:13:0");
-                /*
-                attenteAquittement(&automatique, &testActif);
-                initialConditions(&testActif, &testVoyants, &automatique);
-                __delay_ms(2000);
-                 */
+               
             } else {
 
                 printf("-> TEST:13:1");
@@ -671,7 +660,7 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 14", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:14:0");
+             
             }
 
         }
@@ -697,7 +686,7 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 15", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:15:0");
+            
             }
 
         }
@@ -719,10 +708,8 @@ void main(void) {
 
             } else {
 
-                //testActif = false;
                 alerteDefautEtape16("ETAPE 16", &testActif, &testVoyants, &automatique, &programmation);
-                //printf("-> TEST:16:0");
-                //sortieErreur(&automatique, &testActif, &testVoyants);
+               
             }
 
         }
@@ -748,7 +735,7 @@ void main(void) {
                 testActif = false;
                 alerteDefaut("ETAPE 17", &testActif, &testVoyants);
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
-                //printf("-> TEST:17:0");
+            
             }
 
         }
@@ -771,7 +758,6 @@ void main(void) {
                 sortieErreur(&automatique, &testActif, &testVoyants, &programmation);
                 //initialConditions(&testActif, &testVoyants, &automatique);
                 __delay_ms(2000);
-                //printf("-> TEST:18:0");
             } else {
 
                 printf("-> TEST:18:1");
@@ -787,7 +773,6 @@ void main(void) {
             ledConforme(true);
             alimenter(false);
             okAlert();
-            //attenteDemarrage(&automatique, &testActif);
             attenteAquittement(&automatique, &testActif);
             initialConditions(&testActif, &testVoyants, &automatique, &programmation);
             __delay_ms(2000);

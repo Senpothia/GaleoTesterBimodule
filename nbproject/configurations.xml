@@ -22,6 +22,7 @@
       <itemPath>I2C_LCD.h</itemPath>
       <itemPath>tester.h</itemPath>
       <itemPath>display.h</itemPath>
+      <itemPath>I2C-tester.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -55,6 +56,7 @@
       <itemPath>I2C_LCD.c</itemPath>
       <itemPath>tester.c</itemPath>
       <itemPath>display.c</itemPath>
+      <itemPath>I2C-tester.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
